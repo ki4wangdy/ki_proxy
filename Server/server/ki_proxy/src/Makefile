@@ -21,19 +21,6 @@ build_config := debug
 
 name := ki_proxy
 
-so_name := 1
-
-ifeq ($(platform), linux)
-    name := $(name).so
-endif
-ifeq ($(platform), win32)
-    name := $(name).dll
-endif
-ifeq ($(platform), win32cross)
-    name := $(name).dll
-endif
-
-
 #Sources
 srcs :=
 srcs += main.c
@@ -68,10 +55,10 @@ ifeq ($(platform), maemo_linux)
     compiler_flags += -fPIC # Since we are building shared library, we need Position-Independend Code
 endif
 
-linker_flags := -shared
+linker_flags := 
 
 ifeq ($(platform), linux)
-    linker_flags += -Wl,-soname,$(name).$(so_name)
+    linker_flags += 
 endif
 ifeq ($(platform), win32)
     linker_flags += -s
@@ -79,8 +66,6 @@ endif
 ifeq ($(platform), win32cross)
     linker_flags +=
 endif
-
-
 
 #=======================
 #  Include directories
@@ -98,8 +83,6 @@ ifeq ($(platform), win32cross)
     include_dirs :=
 endif
 
-
-
 #============================
 #  Libs and lib directories
 #============================
@@ -107,7 +90,7 @@ ifeq ($(platform), maemo_linux)
     libs := -lpthread -lrt
 endif
 ifeq ($(platform), linux)
-    libs := -lpthread -lrt
+    libs := -lzmq
 endif
 ifeq ($(platform), win32)
     libs := -lws2_32
@@ -195,7 +178,7 @@ ifeq ($(platform),win32)
 else
 	@$(remove) $(name)
 	@$(remove) $(patsubst %.so,%.a,$(name))
-	@$(remove) $(name).$(so_name)
+	@$(remove) $(name)
 	@$(remove) -rf *.o
 	@$(remove) -rf *.d
 	@$(remove) -rf $(remove_on_clean)
