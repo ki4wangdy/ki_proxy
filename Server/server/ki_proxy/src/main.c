@@ -3,14 +3,15 @@
 
 int main(int argc, char** argv){
 
+	int32_t is_fork = false;
 	int32_t optchar;
-
 	int8_t* router_ip = NULL;
 	int8_t* dealer_ip = NULL;
 
 	while ((optchar = getopt(argc, argv, "br:d:?")) > 0){
 		switch (optchar){
 			case 'b':
+				is_fork = true;
 				break;
 			case 'r':
 				router_ip = (int8_t*)optarg;
@@ -34,6 +35,12 @@ int main(int argc, char** argv){
 	if (!router_ip || !dealer_ip || strlen(router_ip) == 0 || strlen(dealer_ip) == 0){
 		fprintf(stdout, "the router ip or dealer ip is error!, please input it again\n");
 		return 0;
+	}
+
+	// fork the process
+	if (is_fork){
+		int s = init_daemon();
+		assert(s == 0);
 	}
 
 
