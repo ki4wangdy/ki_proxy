@@ -40,8 +40,9 @@ int main(int argc, char** argv){
 	// fork the process
 	if (is_fork){
 		int s = init_daemon();
-		assert(s == 0);
+		assert(s == 1);
 	}
 
+	return 0;
 
 }
