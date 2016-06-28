@@ -89,7 +89,7 @@ ifeq ($(platform), maemo_linux)
     include_dirs :=
 endif
 ifeq ($(platform), linux)
-    include_dirs := -I../include
+    include_dirs := -I../include -I/ki/install
 endif
 ifeq ($(platform), win32)
     include_dirs :=
