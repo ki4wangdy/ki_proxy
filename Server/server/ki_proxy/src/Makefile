@@ -86,6 +86,19 @@ endif
 #============================
 #  Libs and lib directories
 #============================
+ifeq ($(platform), linux)
+    libs_dir := -L/ki/install/lib
+endif
+ifeq ($(platform), win32)
+    libs_dir := 
+endif
+ifeq ($(platform), win32cross)
+    libs_dir :=
+endif
+
+#============================
+#  Libs and lib directories
+#============================
 ifeq ($(platform), maemo_linux)
     libs := -lpthread -lrt
 endif
@@ -135,7 +148,7 @@ endif
 #find all .cpp files and get an .o file name for it to get dependancies for this target
 $(name): $(addprefix $(obj_dir)/,$(patsubst %.c,%.o,$(srcs)))
 	@echo Linking $@...
-	@$(compiler) $^ -o $(name) $(libs) $(linker_flags)
+	@$(compiler) $^ -o $(name) $(libs_dir) $(libs) $(linker_flags)
 
 #======================
 #=compile .cpp sources=
