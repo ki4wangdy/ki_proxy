@@ -148,7 +148,7 @@ endif
 #find all .cpp files and get an .o file name for it to get dependancies for this target
 $(name): $(addprefix $(obj_dir)/,$(patsubst %.c,%.o,$(srcs)))
 	@echo Linking $@...
-	@$(compiler) $^ -o $(name) $(libs_dir) $(libs) $(linker_flags)
+	$(compiler) $^ -o $(name) $(libs_dir) $(libs) $(linker_flags)
 
 #======================
 #=compile .cpp sources=
