@@ -31,7 +31,7 @@ int main(int argc, char** argv){
 	}
 
 	// check the router ip and dealer ip
-	if (router_ip || dealer_ip || strlen(router_ip) == 0 || strlen(dealer_ip) == 0){
+	if (!router_ip || !dealer_ip || strlen(router_ip) == 0 || strlen(dealer_ip) == 0){
 		fprintf(stdout, "the router ip or dealer ip is error!, please input it again\n");
 		return 0;
 	}
