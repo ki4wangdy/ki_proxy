@@ -19,7 +19,7 @@ int main(int argc, char** argv){
 					  "-d daemon fork process to run\n"
 					  "-r router bind ip address\n"
 					  "-d dealer bind ip address\n"
-					  "?  for help",
+					  "?  for help\n",
 					  stdout);
 				break;
 		}
