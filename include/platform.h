@@ -12,7 +12,11 @@
 #include <sys/stat.h>    
 #include <fcntl.h>
 
+#include <pthread.h>
 #include <zmq.h>
+
 #include "type.h"
+#include "item.h"
+#include "daemon.h"
 
 #endif
