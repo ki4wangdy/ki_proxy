@@ -23,6 +23,7 @@ name := ki_proxy
 
 #Sources
 srcs :=
+srcs += item.c
 srcs += main.c
 
 #defines := -DHAVE_CONFIG_H
