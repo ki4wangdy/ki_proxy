@@ -100,11 +100,10 @@ int main(int argc, char** argv){
 	assert(result == 0);
 
 	// init the output thread to start
-	item_t item = item_init(n_router_ip,m_dealer_ip,zmq_ctx);
+	item = item_init(n_router_ip,m_dealer_ip,zmq_ctx);
 	result = item_init(n_router_ip,m_dealer_ip,zmq_ctx);
-	assert(result == 0);
+	pthread_run(item);
 
-	while(1);
 	zmq_ctx_destroy(zmq_ctx);
 
 	return 0;
