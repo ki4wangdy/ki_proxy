@@ -59,7 +59,7 @@ endif
 linker_flags := 
 
 ifeq ($(platform), linux)
-    linker_flags += 
+    linker_flags += -lpthread
 endif
 ifeq ($(platform), win32)
     linker_flags += -s
