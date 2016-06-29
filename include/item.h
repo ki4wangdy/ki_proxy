@@ -4,7 +4,7 @@
 
 #include "platform.h"
 
-typedef item_st{
+typedef struct item_st{
 	int8_t* router;
 	int8_t* dealer;
 	void* zmq_ctx;
