@@ -78,7 +78,7 @@ int main(int argc, char** argv){
 		return 0;
 	}
 
-	if (!n_router_ip || !m_dealer_ip || strlen(n_router_ip) == 0 || strlen(m_dealer_ip) == 0){
+	if (!router_ip || !dealer_ip || strlen(n_router_ip) == 0 || strlen(m_dealer_ip) == 0){
 		print_help();
 		fprintf(stdout, "the n router ip or m dealer ip is error!, please input it again\n");
 		return 0;
