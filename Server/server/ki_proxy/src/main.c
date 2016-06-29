@@ -9,6 +9,7 @@ static void print_help(){
 		"-d dealer bind ip address\n"
 		"-n n router bind ip address\n"
 		"-m m dealer bind ip address\n"
+		"-i stand for the proccess meanning"
 		"?  for help\n",
 		stdout);
 }
@@ -48,7 +49,7 @@ int main(int argc, char** argv){
 	int8_t* n_router_ip = NULL;
 	int8_t* m_dealer_ip = NULL;
 
-	while ((optchar = getopt(argc, argv, "br:d:n:m:?")) > 0){
+	while ((optchar = getopt(argc, argv, "br:d:n:m:i:?")) > 0){
 		switch (optchar){
 			case 'b':
 				is_fork = true;
@@ -58,6 +59,8 @@ int main(int argc, char** argv){
 				break;
 			case 'd':
 				dealer_ip = (int8_t*)optarg;
+				break;
+			case 'i':
 				break;
 			case 'n':
 				n_router_ip = (int8_t*)optarg;
