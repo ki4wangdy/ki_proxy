@@ -30,11 +30,9 @@ static void* pthread_run(void* arg){
 	assert(m == 0);
 
 	zmq_proxy(reouter_socket,dealer_socket,NULL);
-
 	zmq_close (reouter_socket);
 	zmq_close (dealer_socket);
 	item_destory(t);
-
 	pthread_detach(pthread_self());
 	return NULL;
 }
@@ -101,7 +99,6 @@ int main(int argc, char** argv){
 
 	// init the output thread to start
 	item = item_init(n_router_ip,m_dealer_ip,zmq_ctx);
-	result = item_init(n_router_ip,m_dealer_ip,zmq_ctx);
 	pthread_run(item);
 
 	zmq_ctx_destroy(zmq_ctx);
