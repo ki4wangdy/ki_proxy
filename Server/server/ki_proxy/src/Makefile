@@ -23,6 +23,7 @@ name := ki_proxy
 
 #Sources
 srcs :=
+srcs += daemon.c
 srcs += item.c
 srcs += main.c
 srcs += daemon.c
