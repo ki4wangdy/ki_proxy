@@ -25,6 +25,7 @@ name := ki_proxy
 srcs :=
 srcs += item.c
 srcs += main.c
+srcs += daemon.c
 
 #defines := -DHAVE_CONFIG_H
 
