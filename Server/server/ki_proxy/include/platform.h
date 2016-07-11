@@ -18,5 +18,6 @@
 #include "type.h"
 #include "item.h"
 #include "daemon.h"
+#include "log.h"
 
 #endif
