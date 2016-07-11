@@ -24,15 +24,25 @@ static void* pthread_run(void* arg){
 
 	void* reouter_socket = zmq_socket (zmq_ctx,ZMQ_ROUTER);
 	int s = zmq_bind(reouter_socket,router);
-	assert(s == 0);
+	if (s != 0){
+		ki_log("[ki_proxy] : zmq_bind faied for router in main thread !\n");
+	}
 	
 	void* dealer_socket = zmq_socket(zmq_ctx,ZMQ_DEALER);
 	int m = zmq_bind(dealer_socket,dealer);
-	assert(m == 0);
+	if (m != 0){
+		ki_log("[ki_proxy] : zmq_bind failed for dealer in main thread !\n");
+	}
 
+	// proxy for router and dealer
 	zmq_proxy(reouter_socket,dealer_socket,NULL);
+
+	// this stands for failed 
+	ki_log("[ki_proxy] : main failed for zmq_proxy!\n");
+
 	zmq_close (reouter_socket);
 	zmq_close (dealer_socket);
+
 	item_destory(t);
 	pthread_detach(pthread_self());
 	return NULL;
@@ -77,20 +87,23 @@ int main(int argc, char** argv){
 	// check the router ip and dealer ip
 	if (!router_ip || !dealer_ip || strlen(router_ip) == 0 || strlen(dealer_ip) == 0){
 		print_help();
-		fprintf(stdout, "the router ip or dealer ip is error!, please input it again\n");
+		ki_log("[ki_proxy] : the router ip or dealer ip is error!, please input it again\n");
 		return 0;
 	}
 
 	if (!router_ip || !dealer_ip || strlen(n_router_ip) == 0 || strlen(m_dealer_ip) == 0){
 		print_help();
-		fprintf(stdout, "the n router ip or m dealer ip is error!, please input it again\n");
+		ki_log("[ki_proxy] : the n router ip or m dealer ip is error!, please input it again\n");
 		return 0;
 	}
 
 	// fork the process
 	if (is_fork){
 		int s = init_daemon();
-		assert(s == 1);
+		if (s != 1){
+			ki_log("[ki_proxy] : init_daemon is failed, becasuse of hte s != -1\n");
+			return 0;
+		}
 	}
 
 	void* zmq_ctx = zmq_ctx_new();
@@ -98,14 +111,13 @@ int main(int argc, char** argv){
 	// init the input thread to start
 	item_t item = item_init(router_ip,dealer_ip,zmq_ctx);
 	int8_t result = pthread_create(&t,NULL,pthread_run,item);
-	assert(result == 0);
+	ki_log("[ki_proxy] : pthread_create in main thread failed!\n");
 
 	// init the output thread to start
 	item = item_init(n_router_ip,m_dealer_ip,zmq_ctx);
 	pthread_run(item);
 
 	zmq_ctx_destroy(zmq_ctx);
-
 	return 0;
 
 }

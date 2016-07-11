@@ -51,6 +51,8 @@ endif
                 #-O3 -funroll-loops -fomit-frame-pointer
 #compiler_flags += -std=c++0x
 
+compiler_flags += -DDEBUG
+
 ifeq ($(platform), linux)
     compiler_flags += -fPIC # Since we are building shared library, we need Position-Independend Code
 endif
